@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<meta http-equiv="x-ua-Compatible" content="IE=edge">
+	<title>Event</title>
+	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="//chayns1.tobit.com/SlitteRessource/API/Scripts/Mobile/Mobile_V1_latest.js"></script>
+	<style type="text/css">
+	input[type="text"]
+	{
+		width: 100%;
+		box-sizing:border-box;
+	}
+	</style>
+	<script type="text/javascript">
+	var appInfos = null;
+	Chayns.Ready(function(data)
+	{
+		appInfos = data;
+		Chayns.SetIntroText("Hier sind Sie richtig! Direkt anmelden und dabei sein!");
+		Chayns.WrapBox(descContainer);
+		if(localStorage.getItem("isRegistered")==1)
+		{
+			$("#registerContainer").html("Vielen Dank für Deine Anmeldung");
+		} else
+			Chayns.WrapBox(registerContainer);
+
+		if(appInfos.AppUser != null && appInfos.AppUser.FacebookID !=null)
+		{
+			var name= appInfos.AppUser.FacbookUserName;
+			$("#myName").val(Name);
+		}
+	});
+
+	function register(element)
+	{
+		var name= $("#myName").val();
+		if (name.length > 3)
+		{
+			if(appInfos.AppUser.FacebookID != null)
+				{
+					var accessToken = appInfos.AppUser.FacebookAccessToken;
+					var msg = name + " hat sich angemeldet ";
+					Chayns.API.SendInterComMessageAsUser(accessToken,msg, function (data)
+					{
+						if (data == true)
+						{
+							Chayns.ShowPopUp ("Vielen Dank!");
+							localStorage.setItem("isRegistered",1);
+						}
+					});
+				}
+		}
+	}
+	function callUs()
+	{
+		location.href = "tel:025619130";
+	}
+
+	function route()
+	{
+		Chayns.Slitte.GetLongLat(function (lng, lat) {
+			var url="http://maps.google.com/maps?daddr=52.0750+7.008&saddr=" +((lat+"").replace(",","."))+"+"+((lng+"").replace(",","."));
+			url= url.replace(",",".");
+			Chayns.Slitte.OpenLinkInBrowser(url);
+        alert("Longitude: " + lng +"\nLatitude: " + lat);
+});
+	}
+	</script>
+</head>
+<body>
+	<div id="descContainer">
+		<b>Euroleague Final 4 Mailand</b> Sei dabei beim Tippspiel und gewinne einen Highlight-Gutschein!
+		<div class="table">
+			<div>
+				<div style="text-align:right; padding-right:5px;">
+					<div class="button" onclick="callUs()"> Anrufen </div>
+				</div>
+				<div>
+					<div class="button" onclick="route()"> Route </div>
+				</div>
+			</div>
+		</div>
+		<div>
+			<img src="../img/intro.png" style="width:100%">
+		</div>
+	</div>
+	<div id="registerContainer">
+		<h1>Anmeldung</h1>
+		<div class="table">
+			<div>
+				<div>
+					<input id="myName" type="text" placeholder="Name">
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<div id="tippContainer">
+		<h1>Tipps</h1>
+		<div class="table">
+			<div>
+				<div>Real Madrid</div>
+				<div>-</div>
+				<div>CF Barcelona</div>
+				<div>
+					<input id="homePoints" type="number">
+				</div>
+				<div>
+					<input id="guestPoints" type="number">
+				</div>
+
+			</div>
+		</div>
+		<center style="padding-top:10px">
+			<div onclick="sendeTip(this)" class="button">Tipp absenden!</div>
+		</center>
+	</div>
+</body>
+</html>
