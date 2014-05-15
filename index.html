@@ -20,6 +20,8 @@
 		appInfos = data;
 		Chayns.SetIntroText("Hier sind Sie richtig! Direkt anmelden und dabei sein!");
 		Chayns.WrapBox(descContainer);
+		Chayns.WrapBox(TippContainer);
+
 		if(localStorage.getItem("isRegistered")==1)
 		{
 			$("#registerContainer").html("Vielen Dank für Deine Anmeldung");
@@ -33,24 +35,22 @@
 		}
 	});
 
-	function register(element)
+	function sendeTip(element)
 	{
 		var name= $("#myName").val();
+		var punkte1 = $("#homePoints");
+		var punkte2 = $("#guestPoints");
 		if (name.length > 3)
 		{
-			if(appInfos.AppUser.FacebookID != null)
+			var msg = name + " hat getippt: |" + punkte1 + "|" + punkte2;
+			Chayns.API.SendInterComMessageAsUser(accessToken,msg, function (data)
+			{
+				if (data == true)
 				{
-					var accessToken = appInfos.AppUser.FacebookAccessToken;
-					var msg = name + " hat sich angemeldet ";
-					Chayns.API.SendInterComMessageAsUser(accessToken,msg, function (data)
-					{
-						if (data == true)
-						{
-							Chayns.ShowPopUp ("Vielen Dank!");
-							localStorage.setItem("isRegistered",1);
-						}
-					});
+					Chayns.ShowPopUp ("Vielen Dank!");
+					localStorage.setItem("isRegistered",1);
 				}
+			});
 		}
 	}
 	function callUs()
