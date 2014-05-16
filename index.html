@@ -20,7 +20,7 @@
 	Chayns.Ready(function(data)
 	{
 		appInfos = data;
-		Chayns.SetIntroText("Hier sind Sie richtig! Direkt anmelden und dabei sein!");
+		Chayns.SetIntroText("Hier bist Du richtig! Anmelden und mit tippen!");
 		Chayns.WrapBox(descContainer);
 		Chayns.WrapBox(tippContainer);
 		Chayns.WrapBox(registerContainer);
@@ -31,11 +31,6 @@
 		} else
 			Chayns.WrapBox(registerContainer);
 
-		if(appInfos.AppUser != null && appInfos.AppUser.FacebookID !=null)
-		{
-			var name= appInfos.AppUser.FacbookUserName;
-			$("#myName").val(Name);
-		}
 	});
 
 	function sendeTip(element)
