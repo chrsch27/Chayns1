@@ -42,14 +42,8 @@
 		{
 		    var tipp = { name: name, spielnr: "1", punkte1: punkte1, punkte2: punkte2 };
 		    client.getTable("Tipps").insert(tipp);
-			/*Chayns.API.SendInterComMessageAsUser(accessToken,msg, function (data)
-			{
-				if (data == true)
-				{p*/
-					Chayns.ShowPopUp ("Vielen Dank!");
-					localStorage.setItem("isRegistered",1);
-				
-			
+
+		    Chayns.ShowPopUp("Vielen Dank! Tipp wurde eingetragen!");
 		}
 	}
 	function callUs()
