@@ -41,8 +41,8 @@
 	function sendeTip(element)
 	{
 		var name= $("#myName").val();
-		var punkte1 = $("#homePoints");
-		var punkte2 = $("#guestPoints");
+		var punkte1 = $("#homePoints").val();
+		var punkte2 = $("#guestPoints").val();
 		if (name.length > 3)
 		{
 		    var tipp = { name: name, spielnr: "1", punkte1: punkte1, punkte2: punkte2 };
