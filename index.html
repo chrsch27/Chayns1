@@ -44,7 +44,7 @@
 	    }
 
 	    var mdeviceID = 0;
-	    if (appInfos.Device.UID != null) mdeviceID = appInfos.Device.UID;
+	    if (appInfos.Device != null) mdeviceID = appInfos.Device.UID;
 	    var tippsTable = client.getTable("Tipps");
 	    if (name.length > 2) {
 	        tippsTable.where({name: name}).read({success: function(results){
