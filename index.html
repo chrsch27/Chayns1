@@ -51,11 +51,11 @@
                 .read()
                 .done(function (results){
                     if (results.length > 0) {
-                        request.respond(400, { error: 'Item with this name already exists' });
+                        //request.respond(400, { error: 'Item with this name already exists' });
                         Chayns.ShowPopUp("es gibt bereits einen Tipp für den Namen '" + name + "'");
                         dataError += 1;
                     } else {
-                        request.execute();
+                        //request.execute();
                     }
                 });
 	        if (dataError == 0) {
