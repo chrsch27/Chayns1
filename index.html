@@ -43,12 +43,20 @@
 	        Chayns.ShowPopUp("Die zweite Punktzahl ist nicht korrekt!");
 	    }
 
-		var mdeviceID = appInfos.Device.UID;
-		if (name.length > 3) {
-		    var tipp = { name: name, spielnr: "1", punkte1: punkte1, punkte2: punkte2, deviceID: mdeviceID };
-		    client.getTable("Tipps").insert(tipp);
+	    var mdeviceID = appInfos.Device.UID;
+	    var tippsTable = client.getTable("Tipps");
+	    if (name.length > 2) {
+	        tippsTable.where({name: name}).read({success: function(results){
+	            Chayns.ShowPopUp("es gibt bereits einen Tipp für den Namen '" + name + "'");
+	            dataError += 1;
+	                                                }
+	                                            });
+	        if (dataError == 0) {
+	            var tipp = { name: name, spielnr: "1", punkte1: punkte1, punkte2: punkte2, deviceID: mdeviceID };
+	            tippsTable.insert(tipp);
 
-		    Chayns.ShowPopUp("Vielen Dank, " + name + "! Tipp wurde eingetragen!");
+	            Chayns.ShowPopUp("Vielen Dank, " + name + "! Tipp wurde eingetragen!");
+	        }
 		}
 		else {
 		    Chayns.ShowPopUp("Der eingegebene Name '" + name + "' ist zu kurz!");
