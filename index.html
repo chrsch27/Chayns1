@@ -30,15 +30,28 @@
 
 	function sendeTip(element)
 	{
-		var name= $("#myName").val();
-		var punkte1 = $("#homePoints").val();
-		var punkte2 = $("#guestPoints").val();
-		if (name.length > 3)
-		{
-		    var tipp = { name: name, spielnr: "1", punkte1: punkte1, punkte2: punkte2 };
+	    var name = $("#myName").val();
+	    var dataError = 0;
+	    var punkte1 = $("#homePoints").val();
+	    if (punkte1.length <= 0) {
+	        dataError += 1;
+	        Chayns.ShowPopUp("Die erste Punktzahl ist nicht korrekt!");
+	    }
+	    var punkte2 = $("#guestPoints").val();
+	    if (punkte2.length <= 0) {
+	        dataError += 1;
+	        Chayns.ShowPopUp("Die zweite Punktzahl ist nicht korrekt!");
+	    }
+
+		var mdeviceID = appInfos.Device.UID;
+		if (name.length > 3) {
+		    var tipp = { name: name, spielnr: "1", punkte1: punkte1, punkte2: punkte2, deviceID: mdeviceID };
 		    client.getTable("Tipps").insert(tipp);
 
-		    Chayns.ShowPopUp("Vielen Dank, " + name +"! Tipp wurde eingetragen!");
+		    Chayns.ShowPopUp("Vielen Dank, " + name + "! Tipp wurde eingetragen!");
+		}
+		else {
+		    Chayns.ShowPopUp("Der eingegebene Name '" + name + "' ist zu kurz!");
 		}
 	}
 	function callUs()
@@ -80,10 +93,10 @@
 				<div style="width:5px;">-</div>
 				<div style="width:100px;">CF Barcelona</div>
 				<div>
-					<input style="width:20px;" id="homePoints" type="number">
+					<input style="width:35px;" id="homePoints" type="number">
 				</div>
 				<div>
-					<input style="width:20px;" id="guestPoints" type="number">
+					<input style="width:35px;" id="guestPoints" type="number">
 				</div>
 
 			</div>
