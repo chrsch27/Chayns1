@@ -28,8 +28,7 @@
 
 	});
 
-	function sendeTip(element)
-	{
+	function sendeTip(element) {
 	    var name = $("#myName").val();
 	    var dataError = 0;
 	    var punkte1 = $("#homePoints").val();
@@ -49,9 +48,9 @@
 	    if (name.length > 2) {
 	        tippsTable.where({ name: name })
                 .read()
-                .done(function (results){
+                .done(function (results) {
                     if (results.length > 0) {
-                        for (var i = 0; i < results.length, i++; ){
+                        for (var i = 0; i < results.length, i++;) {
                             Chayns.ShowPopUp(results[i].name);
                         }
                         //request.respond(400, { error: 'Item with this name already exists' });
@@ -62,12 +61,12 @@
                     }
                 }, insertTipp()
                 );
-       
-		}
-		else {
-		    Chayns.ShowPopUp("Der eingegebene Name '" + name + "' ist zu kurz!");
-		}
-	    
+
+	    }
+	    else {
+	        Chayns.ShowPopUp("Der eingegebene Name '" + name + "' ist zu kurz!");
+	    }
+	}
 	    function insertTipp() {
 	        if (dataError == 0) {
 	            var tipp = { name: name, spielnr: "1", punkte1: punkte1, punkte2: punkte2, deviceID: mdeviceID };
