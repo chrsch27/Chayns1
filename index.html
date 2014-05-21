@@ -43,8 +43,6 @@
 	        Chayns.ShowPopUp("Die zweite Punktzahl ist nicht korrekt!");
 	    }
 
-	    var mdeviceID = 0;
-	    if (appInfos != null) mdeviceID = appInfos.Device.UID;
 	    var tippsTable = client.getTable("Tipps");
 	    if (name.length > 2) {
 	        tippsTable.where({ name: name })
@@ -70,6 +68,9 @@
 	}
 	    function insertTipp(name,punkte1,punkte2) {
 	        if (dataError == 0) {
+
+	            var mdeviceID = 0;
+	            if (appInfos != null) mdeviceID = appInfos.Device.UID;
 	            var tipp = { name: name, spielnr: "1", punkte1: punkte1, punkte2: punkte2, deviceID: mdeviceID };
 	            tippsTable.insert(tipp);
 
