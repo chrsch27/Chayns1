@@ -56,7 +56,7 @@
                         //request.respond(400, { error: 'Item with this name already exists' });
                         var buttons = [
                                     new Chayns.PopUpButton('Ja', function () {
-                                        updateTipp(tippsTable, name, punkte1, punkte2,mdeviceID,);
+                                        updateTipp(tippsTable, name, punkte1, punkte2,mdeviceID,results[0].id);
                                      }),
                                      new Chayns.PopUpButton('Nein', function () {
                                         return false;
