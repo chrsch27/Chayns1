@@ -42,10 +42,11 @@
 	        dataError += 1;
 	        Chayns.ShowPopUp("Die zweite Punktzahl ist nicht korrekt!");
 	    }
-
+	    var mdeviceID = 0;
+	    if (appInfos != null) mdeviceID = appInfos.Device.UID;
 	    var tippsTable = client.getTable("Tipps");
 	    if (name.length > 2) {
-	        tippsTable.where({ name: name })
+	        tippsTable.where({ name: name, deviceID: mdeviceID })
                 .read()
                 .done(function (results) {
                     if (results.length > 0) {
@@ -53,12 +54,20 @@
                             Chayns.ShowPopUp(results[i].name);
                         }
                         //request.respond(400, { error: 'Item with this name already exists' });
-                        Chayns.ShowPopUp("es gibt bereits einen Tipp für den Namen '" + name + "'");
+                        var buttons = [
+                                    new Chayns.PopUpButton('Ja', function () {
+                                        updateTipp(tippsTable, name, punkte1, punkte2,mdeviceID,);
+                                     }),
+                                     new Chayns.PopUpButton('Nein', function () {
+                                        return false;
+                                    })
+                        ];
+                        Chayns.ShowPopUp("es gibt bereits einen Tipp für den Namen '" + name + "', der von diesem Gerät verschickt wurde.  Soll dieser Tipp überschrieben werden?");
                         dataError += 1;
                     } else {
-                        insertTipp(tippsTable,name, punkte1, punkte2);
+                        insertTipp(tippsTable,name, punkte1, punkte2,mdeviceID);
                     }
-                }, insertTipp(tippsTable, name, punkte1, punkte2)
+                }, insertTipp(tippsTable, name, punkte1, punkte2,mdeviceID)
                 );
 
 	    }
@@ -66,18 +75,32 @@
 	        Chayns.ShowPopUp("Der eingegebene Name '" + name + "' ist zu kurz!");
 	    }
 	}
-	function insertTipp(tippsTable,name, punkte1, punkte2) {
+	function insertTipp(tippsTable,name, punkte1, punkte2,mdeviceID) {
 	        if (dataError == 0) {
 
-	            var mdeviceID = 0;
-	            if (appInfos != null) mdeviceID = appInfos.Device.UID;
+
 	            var tipp = { name: name, spielnr: "1", punkte1: punkte1, punkte2: punkte2, deviceID: mdeviceID };
 	            tippsTable.insert(tipp);
 
 	            Chayns.ShowPopUp("Vielen Dank, " + name + "! Tipp wurde eingetragen!");
 	        }
 
+	}
+
+	function updateTipp(tippsTable, name, punkte1, punkte2, mdeviceID,altTippID) {
+	   
+	        var tipp = { id:altTippID, name: name, spielnr: "1", punkte1: punkte1, punkte2: punkte2, deviceID: mdeviceID };
+	        tippsTable.update(tipp).done(function (ergebnis) {
+	            Chayns.ShowPopUp("Vielen Dank, " + name + "! Tipp wurde geändert!");
+	        }, function(err) {
+	            Chayns.ShowPopUp("Fehler bei Änderung!");
+	        });
+
+	        
 	    }
+
+	}
+
 
         
 
