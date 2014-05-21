@@ -16,7 +16,8 @@
 	</style>
 	<script type="text/javascript">
 	    var appInfos = null;
-	    var client = new WindowsAzure.MobileServiceClient("https://scristservice.azure-mobile.net/","EZVUANryJLJgpiFyDAhpOSBlThuVgr93");
+	    var client = new WindowsAzure.MobileServiceClient("https://scristservice.azure-mobile.net/", "EZVUANryJLJgpiFyDAhpOSBlThuVgr93");
+	    var dataError = 0;
 	Chayns.Ready(function(data)
 	{
 		appInfos = data;
@@ -30,7 +31,6 @@
 
 	function sendeTip(element) {
 	    var name = $("#myName").val();
-	    var dataError = 0;
 	    var punkte1 = $("#homePoints").val();
 	    if (punkte1.length <= 0) {
 	        dataError += 1;
