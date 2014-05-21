@@ -56,9 +56,9 @@
                         Chayns.ShowPopUp("es gibt bereits einen Tipp für den Namen '" + name + "'");
                         dataError += 1;
                     } else {
-                        insertTipp(name,punkte1,punkte2);
+                        insertTipp(tippsTable,name, punkte1, punkte2);
                     }
-                }, insertTipp(name, punkte1, punkte2)
+                }, insertTipp(tippsTable, name, punkte1, punkte2)
                 );
 
 	    }
@@ -66,7 +66,7 @@
 	        Chayns.ShowPopUp("Der eingegebene Name '" + name + "' ist zu kurz!");
 	    }
 	}
-	    function insertTipp(name,punkte1,punkte2) {
+	function insertTipp(tippsTable,name, punkte1, punkte2) {
 	        if (dataError == 0) {
 
 	            var mdeviceID = 0;
