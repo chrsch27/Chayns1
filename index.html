@@ -62,7 +62,7 @@
                                         return false;
                                     })
                         ];
-                        Chayns.ShowPopUp("es gibt bereits einen Tipp für den Namen '" + name + "', der von diesem Gerät verschickt wurde.  Soll dieser Tipp überschrieben werden?");
+                        Chayns.ShowPopUp("es gibt bereits einen Tipp für den Namen '" + name + "', der von diesem Gerät verschickt wurde.  Soll dieser Tipp überschrieben werden?", "Nachfrage", buttons);
                         dataError += 1;
                     } else {
                         insertTipp(tippsTable,name, punkte1, punkte2,mdeviceID);
