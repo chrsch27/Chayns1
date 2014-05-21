@@ -47,10 +47,13 @@
 	    if (appInfos != null) mdeviceID = appInfos.Device.UID;
 	    var tippsTable = client.getTable("Tipps");
 	    if (name.length > 2) {
-	        tippsTable.where({ name: name })
+	        tippsTable   //.where({ name: name })
                 .read()
                 .done(function (results){
                     if (results.length > 0) {
+                        for (var i = 0; i < results.length, i++; ){
+                            Chayns.ShowPopUp(results[i].name);
+                        }
                         //request.respond(400, { error: 'Item with this name already exists' });
                         Chayns.ShowPopUp("es gibt bereits einen Tipp für den Namen '" + name + "'");
                         dataError += 1;
