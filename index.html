@@ -58,22 +58,28 @@
                         Chayns.ShowPopUp("es gibt bereits einen Tipp für den Namen '" + name + "'");
                         dataError += 1;
                     } else {
-                        //request.execute();
+                        insertTipp();
                     }
-                }, function (err) {
-                    if (dataError == 0) {
-                        var tipp = { name: name, spielnr: "1", punkte1: punkte1, punkte2: punkte2, deviceID: mdeviceID };
-                        tippsTable.insert(tipp);
-
-                        Chayns.ShowPopUp("Vielen Dank, " + name + "! Tipp wurde eingetragen!");
-                    }
-                });
-	        
+                }, insertTipp()
+                );
+       
 		}
 		else {
 		    Chayns.ShowPopUp("Der eingegebene Name '" + name + "' ist zu kurz!");
 		}
-	}
+	    
+	    function insertTipp() {
+	        if (dataError == 0) {
+	            var tipp = { name: name, spielnr: "1", punkte1: punkte1, punkte2: punkte2, deviceID: mdeviceID };
+	            tippsTable.insert(tipp);
+
+	            Chayns.ShowPopUp("Vielen Dank, " + name + "! Tipp wurde eingetragen!");
+	        }
+
+	    }
+
+        
+
 	function callUs()
 	{
 		location.href = "tel:025619130";
