@@ -60,13 +60,15 @@
                     } else {
                         //request.execute();
                     }
-                });
-	        if (dataError == 0) {
-	            var tipp = { name: name, spielnr: "1", punkte1: punkte1, punkte2: punkte2, deviceID: mdeviceID };
-	            tippsTable.insert(tipp);
+                }, function (err) {
+                    if (dataError == 0) {
+                        var tipp = { name: name, spielnr: "1", punkte1: punkte1, punkte2: punkte2, deviceID: mdeviceID };
+                        tippsTable.insert(tipp);
 
-	            Chayns.ShowPopUp("Vielen Dank, " + name + "! Tipp wurde eingetragen!");
-	        }
+                        Chayns.ShowPopUp("Vielen Dank, " + name + "! Tipp wurde eingetragen!");
+                    }
+                });
+	        
 		}
 		else {
 		    Chayns.ShowPopUp("Der eingegebene Name '" + name + "' ist zu kurz!");
