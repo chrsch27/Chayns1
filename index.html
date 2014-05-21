@@ -89,7 +89,7 @@
 
 	function updateTipp(tippsTable, name, punkte1, punkte2, mdeviceID,altTippID) {
 	   
-	        var tipp = { id:altTippID, name: name, spielnr: "1", punkte1: punkte1, punkte2: punkte2, deviceID: mdeviceID };
+	        var tipp = { id: altTippID, spielnr: "1", punkte1: punkte1, punkte2: punkte2 };
 	        tippsTable.update(tipp).done(function (ergebnis) {
 	            Chayns.ShowPopUp("Vielen Dank, " + name + "! Tipp wurde geändert!");
 	        }, function(err) {
